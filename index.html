@@ -89,7 +89,6 @@
             background-size: cover;
         }
 
-        /* Overlay for readability */
         .hero::before {
             content: "";
             position: absolute;
@@ -176,6 +175,8 @@
         /* Sections */
         section {
             padding: 5rem 0;
+            position: relative;
+            z-index: 2; /* ✅ Ensures sections display above hero overlay */
         }
 
         .container {
@@ -617,3 +618,5 @@
             <p>&copy; 2025 Hunter Nuga. All rights reserved. It's a slow process, but quitting won't speed it up.</p>
         </div>
     </footer>
+</body>
+</html>
