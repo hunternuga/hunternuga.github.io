@@ -85,11 +85,27 @@
             text-align: center;
             color: white;
             position: relative;
+            background: url("https://images.unsplash.com/photo-1483721310020-03333e577078") no-repeat center center;
+            background-size: cover;
+        }
+
+        /* Overlay for readability */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
         }
 
         .hero-content {
             max-width: 800px;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -452,7 +468,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-            </ul>z
+            </ul>
         </div>
     </nav>
 
@@ -478,13 +494,10 @@
         <div class="container">
             <h2 class="section-title fade-in">About Me</h2>
             <div class="about-content fade-in">
-                <div class="about-image">
-                    <img src="https://www.linkedin.com/in/hunter-nuga-06b345145" alt="Hunter Nuga" class="profile-img">
-                </div>
                 <div class="about-text">
                     <p>
                         I'm a passionate DevOps engineer with extensive experience in cloud infrastructure, 
-                        automation, and continuous integration/deployment. I specialize in building robust, 
+                        automation, and CI/CD. I specialize in building robust, 
                         scalable systems that enable teams to deliver software faster and more reliably.
                     </p>
                 </div>
@@ -503,8 +516,8 @@
                     <h4>Python</h4>
                 </div>
                 <div class="skill-item">
-                    <i class="fab fa-podman"></i>
-                    <h4>Podman</h4>
+                    <i class="fab fa-docker"></i>
+                    <h4>Docker</h4>
                 </div>
                 <div class="skill-item">
                     <i class="fas fa-chart-line"></i>
@@ -525,21 +538,16 @@
                     </div>
                     <div class="project-content">
                         <p class="project-description">
-                            A comprehensive Infrastructure as Code solution that deploys a multi-tier 
-                            application across AWS and Azure with automated failover capabilities.
+                            An AWS test environment built in Terraform.
+                            Complete with basic ec2 resources, networking components & Terraform modules.
                         </p>
                         <div class="tech-stack">
-                            <span class="tech-tag">Terraform</span>
                             <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Azure</span>
-                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Terraform</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i> Demo
+                            <a href="https://github.com/hunternuga/core-infrastructure" class="project-link">
+                                <i class="fab fa-github"></i> Code | Personal Test AWS Infrastructure
                             </a>
                         </div>
                     </div>
@@ -548,25 +556,20 @@
                 <div class="project-card fade-in">
                     <div class="project-header">
                         <h3 class="project-title">Monitoring Stack</h3>
-                        <p>Comprehensive observability solution</p>
+                        <p>Monitoring and Reporting application for Windows machines.</p>
                     </div>
                     <div class="project-content">
                         <p class="project-description">
-                            Full-stack monitoring solution using Prometheus, Grafana, and ELK stack 
-                            with custom dashboards and automated alerting systems.
+                            Basic Windows system monitoring tool 
+                            used to gather and report metrics to user, via scheduled tasks.
                         </p>
                         <div class="tech-stack">
-                            <span class="tech-tag">Prometheus</span>
-                            <span class="tech-tag">Grafana</span>
-                            <span class="tech-tag">ELK Stack</span>
-                            <span class="tech-tag">AlertManager</span>
+                            <span class="tech-tag">Powershell</span>
+                            <span class="tech-tag">Windows Server</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="https://github.com/hunternuga/system-reporting-tool.git" class="project-link">
                                 <i class="fab fa-github"></i> Code
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-chart-bar"></i> Dashboard
                             </a>
                         </div>
                     </div>
@@ -598,10 +601,10 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <a href="#" class="social-link">
+                    <a href="https://github.com/hunternuga" class="social-link">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="https://www.linkedin.com/in/hunter-nuga-06b345145/" class="social-link">
                         <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
@@ -614,57 +617,3 @@
             <p>&copy; 2025 Hunter Nuga. All rights reserved. It's a slow process, but quitting won't speed it up.</p>
         </div>
     </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Active navigation highlighting
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
