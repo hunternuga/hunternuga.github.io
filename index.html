@@ -662,7 +662,7 @@ footer p {
         I'm a DevOps engineer based in rural Utah with a passion for cloud infrastructure, automation, and CI/CD pipelines. I enjoy building systems that are reliable, scalable, and maintainable.
       </p>
       <p>
-        Outside of work I run a self-hosted homelab on my own infrastructure — managing containerized services with Terraform and Docker, exposing them securely via Cloudflare Tunnel, and monitoring everything with Prometheus and Grafana.
+        Outside of work I run a homelab built on AWS Lightsail — Linux nodes with attached static IPs, orchestrated with Kubernetes via K3s and managed through Rancher. Everything is provisioned with Terraform, exposed securely via Cloudflare Tunnel, and monitored with Prometheus and Grafana. Console access is locked down with IAM Identity Center SSO.
       </p>
       <p>
         When I'm not at the keyboard, I'm enjoying video games, good food, and traveling with my wife Megan.
@@ -672,8 +672,8 @@ footer p {
       <div class="skills-grid">
         <div class="skill-item"><i class="fab fa-aws"></i> AWS</div>
         <div class="skill-item"><i class="fas fa-layer-group"></i> Terraform</div>
-        <div class="skill-item"><i class="fab fa-docker"></i> Docker / Docker</div>
-        <div class="skill-item"><i class="fas fa-dharmachakra"></i> Kubernetes</div>
+        <div class="skill-item"><i class="fab fa-docker"></i> Docker</div>
+        <div class="skill-item"><i class="fas fa-dharmachakra"></i> K3s / Rancher</div>
         <div class="skill-item"><i class="fab fa-python"></i> Python</div>
         <div class="skill-item"><i class="fas fa-code-branch"></i> CI/CD</div>
         <div class="skill-item"><i class="fas fa-shield-alt"></i> Cloudflare</div>
@@ -694,12 +694,15 @@ footer p {
         <div class="project-icon"><i class="fas fa-server"></i></div>
         <span class="project-badge">Active</span>
       </div>
-      <h3>Self-Hosted Homelab</h3>
-      <p>A production-grade homelab running containerized services managed entirely with Terraform and Docker. Exposed securely via Cloudflare Zero Trust Tunnel with no port forwarding. Includes a monitoring stack with Prometheus, cAdvisor, and Grafana dashboards.</p>
+      <h3>Homelab on AWS Lightsail — K3s & Rancher</h3>
+      <p>A production-grade homelab running on AWS Lightsail nodes, provisioned with Terraform and orchestrated with Kubernetes via K3s, managed through Rancher. Exposed securely via Cloudflare Zero Trust Tunnel with no port forwarding, with console access locked down through IAM Identity Center SSO. Includes a monitoring stack with Prometheus, cAdvisor, and Grafana dashboards.</p>
       <div class="project-tags">
+        <span class="tag">AWS Lightsail</span>
         <span class="tag">Terraform</span>
-        <span class="tag">Docker</span>
+        <span class="tag">K3s</span>
+        <span class="tag">Rancher</span>
         <span class="tag">Cloudflare Tunnel</span>
+        <span class="tag">IAM Identity Center</span>
         <span class="tag">Prometheus</span>
         <span class="tag">Grafana</span>
         <span class="tag">cAdvisor</span>
