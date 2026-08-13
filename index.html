@@ -195,6 +195,13 @@ nav {
   animation: fadeUp 0.6s ease 0.2s forwards;
 }
 
+.role-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--accent2);
+  animation: blink 1s step-end infinite;
+}
+
 .hero-desc {
   font-size: 1rem;
   color: var(--text-dim);
@@ -604,6 +611,34 @@ footer p {
   50% { opacity: 1; width: 40px; }
 }
 
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .role-cursor {
+    animation: none;
+  }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   nav { padding: 1rem 1.5rem; }
@@ -638,7 +673,7 @@ footer p {
   <div class="hero-content">
     <div class="hero-tag">Available for opportunities</div>
     <h1 class="hero-name">Hunter<br><span class="accent">Nuga</span></h1>
-    <p class="hero-role">DevOps Engineer</p>
+    <p class="hero-role"><span id="role-text"></span><span class="role-cursor">|</span></p>
     <p class="hero-desc">
       Automating AWS infrastructure with Terraform, building and deploying Python and Kubernetes apps, and learning all things cloud technology.
     </p>
@@ -656,10 +691,10 @@ footer p {
 
 <!-- About -->
 <section id="about">
-  <div class="section-label">About</div>
-  <h2 class="section-title">A bit about me</h2>
+  <div class="section-label reveal">About</div>
+  <h2 class="section-title reveal">A bit about me</h2>
   <div class="about-grid">
-    <div class="about-text">
+    <div class="about-text reveal">
       <p>
         I'm a DevOps engineer based in rural Utah with a passion for cloud infrastructure, automation, and CI/CD pipelines. I enjoy building systems that are reliable, scalable, and maintainable.
       </p>
@@ -672,14 +707,14 @@ footer p {
     </div>
     <div>
       <div class="skills-grid">
-        <div class="skill-item"><i class="fab fa-aws"></i> AWS</div>
-        <div class="skill-item"><i class="fas fa-layer-group"></i> Terraform</div>
-        <div class="skill-item"><i class="fab fa-docker"></i> Docker</div>
-        <div class="skill-item"><i class="fas fa-dharmachakra"></i> K3s / Rancher</div>
-        <div class="skill-item"><i class="fab fa-python"></i> Python</div>
-        <div class="skill-item"><i class="fas fa-code-branch"></i> CI/CD</div>
-        <div class="skill-item"><i class="fas fa-shield-alt"></i> Cloudflare</div>
-        <div class="skill-item"><i class="fas fa-chart-line"></i> Prometheus / Grafana</div>
+        <div class="skill-item reveal" style="--i:0"><i class="fab fa-aws"></i> AWS</div>
+        <div class="skill-item reveal" style="--i:1"><i class="fas fa-layer-group"></i> Terraform</div>
+        <div class="skill-item reveal" style="--i:2"><i class="fab fa-docker"></i> Docker</div>
+        <div class="skill-item reveal" style="--i:3"><i class="fas fa-dharmachakra"></i> K3s / Rancher</div>
+        <div class="skill-item reveal" style="--i:4"><i class="fab fa-python"></i> Python</div>
+        <div class="skill-item reveal" style="--i:5"><i class="fas fa-code-branch"></i> CI/CD</div>
+        <div class="skill-item reveal" style="--i:6"><i class="fas fa-shield-alt"></i> Cloudflare</div>
+        <div class="skill-item reveal" style="--i:7"><i class="fas fa-chart-line"></i> Prometheus / Grafana</div>
       </div>
     </div>
   </div>
@@ -687,11 +722,11 @@ footer p {
 
 <!-- Projects -->
 <section id="projects">
-  <div class="section-label">Projects</div>
-  <h2 class="section-title">Things I've built</h2>
+  <div class="section-label reveal">Projects</div>
+  <h2 class="section-title reveal">Things I've built</h2>
   <div class="projects-grid">
 
-    <div class="project-card featured">
+    <div class="project-card featured reveal" style="--i:0">
       <div class="project-header">
         <div class="project-icon"><i class="fas fa-server"></i></div>
         <span class="project-badge">Active</span>
@@ -715,7 +750,7 @@ footer p {
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card reveal" style="--i:1">
       <div class="project-header">
         <div class="project-icon"><i class="fab fa-python"></i></div>
       </div>
@@ -737,9 +772,9 @@ footer p {
 
 <!-- Contact -->
 <section id="contact">
-  <div class="section-label">Contact</div>
-  <h2 class="section-title">Let's connect</h2>
-  <div class="contact-inner">
+  <div class="section-label reveal">Contact</div>
+  <h2 class="section-title reveal">Let's connect</h2>
+  <div class="contact-inner reveal">
     <p>
       I'm always open to talking about infrastructure, DevOps, or interesting projects. Feel free to reach out via email or find me on GitHub.
     </p>
@@ -762,6 +797,61 @@ footer p {
   <p>&copy; 2026 Hunter Nuga. All rights reserved.</p>
   <p>Built with HTML, CSS & ☕</p>
 </footer>
+
+<script>
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Scroll reveal
+if (!prefersReducedMotion) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+}
+
+// Typewriter role text
+const roles = ['DevOps Engineer', 'Terraform Practitioner', 'Kubernetes Operator', 'Cloud Automator'];
+const roleTextEl = document.getElementById('role-text');
+
+if (prefersReducedMotion) {
+  roleTextEl.textContent = roles[0];
+} else {
+  let roleIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function typeLoop() {
+    const current = roles[roleIndex];
+    if (!deleting) {
+      charIndex++;
+      roleTextEl.textContent = current.slice(0, charIndex);
+      if (charIndex === current.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1800);
+        return;
+      }
+    } else {
+      charIndex--;
+      roleTextEl.textContent = current.slice(0, charIndex);
+      if (charIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      }
+    }
+    setTimeout(typeLoop, deleting ? 40 : 70);
+  }
+
+  typeLoop();
+}
+</script>
 
 </body>
 </html>
